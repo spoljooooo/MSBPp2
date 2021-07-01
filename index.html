@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>LaLiga</title>
+  </head>
+  <body>
+    <h1>Baze podataka projekt: La Liga</h1>
+    <p><em><strong>Marko Špoljarec</strong></em>, 2. godina Matematike i račurastva, Odjel za matematiku.</p>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Što je La Liga:</h3></center>
+    <table>
+      <tr>
+        <td><img src="images/laliga.png" width="250" height="200"></td>
+        <td>
+          <p>
+          Liga Nacional de Fútbol Profesional, odnosno skraćeno La Liga je prva Španjolska nogometna liga.
+          Osnovana je 1929. godine i u njoj se svake godine natječe 20 najboljih španjolskih klubova.
+          Trenutni rekorder po broju osvojenih naslova je Real Madrid koji ih ima čak 34, a ove godine je
+          Atlético Madrid srušio Barcelonu i Real Madrid s trona i odnio naslov.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Ideja za projekt:</h3></center>
+    <table>
+      <tr>
+        <td><img src="images/mysql.png" width="250" height="200"></td>
+        <td>
+          <p>
+          Kao veliki fan nogometa, pogotovo Barcelone odlučio sam napraviti bazu podataka za La Ligu jer mi se to činila kao
+          zanimljiva i korisna tema za izradu projekta za ovaj kolegij.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Model entita i veze i relacijski model:</h3></center>
+    <table>
+      <tr>
+        <td><img src="images/mev1.png" width="750" height="550"></td>
+        <td><img src="images/relacija1.png" width="750" height="550"></td>
+      </tr>
+    </table>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Izrada tablica i veze između tablica:</h3></center>
+    <p>
+      Tablice sam radio sljedećim redosljedom:
+    </p>
+    <ol>
+      <li>
+        Tablice koje ne sadrže strane ključeve
+      </li>
+      <li>
+        Tablice koje sadrže strane ključeve
+      </li>
+    </ol>
+    <br>
+    <h4>Tablica <em>DRZAVA</em>:</h4>
+    <table border="1">
+      <tr>
+        <td>Kod:</td>
+        <td>Opis:</td>
+        <td>Veza:</td>
+      </tr>
+      <tr>
+        <td><img src="images/drzava.png" width="400" height="100"></td>
+        <td>
+          <p>
+            Tablica DRZAVA sadrži sve države na svijetu. Odnosno sadrži informacije o ID-u države, njenom nazivu te broju stanovnika.
+          </p>
+        </td>
+        <td>
+          <p>
+            Tablica DRZAVA je povezana s tablicom GRAD vezom 1:M. Odnosno svaka država može imati
+            više gradova, a svaki grad može imati jednu državu. Također, tablica DRZAVA je povezana s
+            tablicom IGRAC vezom 1:M, odnosno, iz svake države može biti više igrača, dok svaki igrač pripada samo
+            jednoj državi.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <h4>Tablica <em>GRAD</em>:</h4>
+    <table border="1">
+      <tr>
+        <td>Kod:</td>
+        <td>Opis:</td>
+        <td>Veza:</td>
+      </tr>
+      <tr>
+        <td><img src="images/grad.png" width="700" height="100"></td>
+        <td>
+          <p>
+            Tablica GRAD sadrži sve gradove svake države. Odnosno sadrži informacije o ID-u grada, njegovom imenu te strani ključ koji
+            je spaja s tablicom DRZAVA.
+          </p>
+        </td>
+        <td>
+          <p>
+            Tablica GRAD povezana je s tablicom DRZAVA (<strong>veza je već objašnjena kod opisa tablice DRZAVA</strong>). Također, tablica GRAD
+            je povezana s tablicom STADION vezom 1:M, odnosno, u svakom gradu se može nalaziti više stadiona, ali svaki stadion se nalazi u točno jednom gradu.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <h4>Tablica <em>STADION</em>:</h4>
+    <table border="1">
+      <tr>
+        <td>Kod:</td>
+        <td>Opis:</td>
+        <td>Veza:</td>
+      </tr>
+      <tr>
+        <td><img src="images/stadion.png" width="600" height="150"></td>
+        <td>
+          <p>
+            Tablica STADION sadrži popis svih stadiona na kojima se odigravaju utakmice La Lige. Njezini atributi su ID, naziv stadiona,
+            godina gradnje, kapacitet, cijena karate te strani ključ na tablicu GRAD.
+          </p>
+        </td>
+        <td>
+          <p>
+            Tablica STADION povezana je s tablicom GRAD (<strong>veza je već objašnjena kod opisa tablice GRAD</strong>). Također,
+            tablica STADION povezana je s tablicom KLUB vezom 1:1, odnosno, svaki klub ima svoj jedinstveni stadion to jest svaki stadion pripada
+            točno jednom klubu.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <h4>Tablica <em>SPONZOR</em>:</h4>
+    <table border="1">
+      <tr>
+        <td>Kod:</td>
+        <td>Opis:</td>
+        <td>Veza:</td>
+      </tr>
+      <tr>
+        <td><img src="images/sponzor.png" width="400" height="100"></td>
+        <td>
+          <p>
+            Tablica SPONZOR sadrži popis svi spoznora koji sponzoriraju klubove u La Ligi.
+            Njezini atributi su ID i ime kompanije ili osobe sponzora.
+          </p>
+        </td>
+        <td>
+          <p>
+            Tablica SPONZOR povezana je s tablicom KLUB vezom M:N. Odnosno, svaki sponzor može sponzorirati više klubova te
+            svaki klub može imati više od jednog sponzora. Kako je veza M:N problematična, napravio sam tablicu KLUB_SPONZOR
+            kako bi riješio problem veze M:N.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <h4>Tablica <em>LALIGA</em>:</h4>
+    <table border="1">
+      <tr>
+        <td>Kod:</td>
+        <td>Opis:</td>
+        <td>Veza:</td>
+      </tr>
+      <tr>
+        <td><img src="images/laligatablica.png" width="500" height="100"></td>
+        <td>
+          <p>
+            Tablica LALIGA sadrži popis svih klubova u La Ligi po njihovim pozicijama. Njezini atributi su ID, odnosno pozicija kluba
+            na ljestivici te atribute Liga Prvaka i Europska Liga koje označuju je li se klub uspio kvalificrati u neko od velikih natejcanja.
+          </p>
+        </td>
+        <td>
+          <p>
+            Tablica LALIGA povezana je s tablicom KLUB vezom 1:M, odnosno, svaki klub ima točno jednu određenu poziciju dok u samoj ligi se može
+            natjecati više od jednog kluba.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <h4>Tablica <em>KLUB</em>:</h4>
+    <table border="1">
+      <tr>
+        <td>Kod:</td>
+        <td>Opis:</td>
+        <td>Veza:</td>
+      </tr>
+      <tr>
+        <td><img src="images/klub.png" width="700" height="170"></td>
+        <td>
+          <p>
+            Tablica KLUB sadrži popis svih klubova u La Ligi. Njezini atributi su ime kluba, boja kluba, broj osvojenih naslova,
+            ime i prezime vlasnika kluba te strane ključeve na tablicu LALIGA i tablicu STADION.
+          </p>
+        </td>
+        <td>
+          <p>
+            Tablica KLUB povezana je s tablicom LALIGA (<strong>veza je već objašnjena kod opisa tablice LALIGA</strong>), tablicom STADION (<strong>veza je već objašnjena kod opisa tablice STADION</strong>)
+            , tablicom SPONZOR (<strong>veza je već objašnjena kod opisa tablice SPONZOR</strong>)
+            te tablicom IGRAC vezom 1:M. Odnosno svaki igrač može igrati u točno jednom klubu, dok svaki klub može imati više od jednog igrača.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <h4>Tablica <em>KLUB_SPONZOR</em>:</h4>
+    <table border="1">
+      <tr>
+        <td>Kod:</td>
+        <td>Opis:</td>
+        <td>Veza:</td>
+      </tr>
+      <tr>
+        <td><img src="images/klubsponzor.png" width="650" height="120"></td>
+        <td>
+          <p>
+            Tablica KLUB_SPONZOR napravljena je kako bi se riješio problem M:N veze između tablica KLUB i SPONZOR.
+          </p>
+        </td>
+        <td>
+          <p>
+            Povezana je s tablicama KLUB i SPONZOR vezama 1:M.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Unos podataka:</h3></center>
+    <ul>
+      <li>Podatke sam unosio istim redoslijedom kojim sam pravio tablice</li>
+      <li>Nisam unosio sve podatke, nego sasvim dovoljno da svaki upit vrati barem jedan redak</li>
+    </ul>
+    <br>
+    <center>
+    <table border="1">
+      <tr>
+        <td>Sintaksa:</td>
+        <td>Primjer:</td>
+      </tr>
+      <tr>
+        <td><img src="images/insert2.png" width="600" height="150"></td>
+        <td><img src="images/unos.png" width="600" height="150"></td>
+      </tr>
+    </table>
+    </center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Jednostavni upiti:</h3></center>
+    <ul>
+      <li>Jednostavni upiti su upiti nad jednom tablicom</li>
+      <li>Koristi se naredba SELECT</li>
+      <li>potrebno je navesti popis naziva stupaca nakon klauzule SELECT, naziv tablice iz koje želimo izabrati stupce te uz naredbu WHERE popis uvjeta koji moraju biti zadovoljeni</li>
+      <li>ukoliko WHERE klazula nije navedena tada će sve torke biti izabrane</li>
+    </ul>
+    <center>
+    <table border="1">
+      <tr>
+        <td>Opis:</td>
+        <td>Kod:</td>
+      </tr>
+      <tr>
+        <td>
+          Ovaj primjer kao rezultat vraća sve igrače Barcelone iz
+          tablice IGRAC tako što sam postavio klazulu WHERE kao WHERE = 'Barcelona'.
+        </td>
+        <td><img src="images/jednostavni.png" width="500" height="100"></td>
+      </tr>
+    </table>
+    </center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Upiti nad više tablica:</h3></center>
+    <ul>
+      <li>U praksi je potrebno često dohvatiti informacije iz više tablica kako bi dobili smislenije informacije</li>
+      <li>Kod upita nad više tablica koristimo JOIN operacije</li>
+    </ul>
+    <center>
+    <table border="1">
+      <tr>
+        <td>Opis:</td>
+        <td>Kod:</td>
+      </tr>
+      <tr>
+        <td>
+          Uz pomoć JOIN operacije na atribut id_drzava spojio sam tablice IGRAC i DRZAVA te kao rezultat vratio sve igrače koji su iz Španjolske i igraju u La Ligi.
+        </td>
+        <td><img src="images/nadvise.png" width="500" height="100"></td>
+      </tr>
+    </table>
+    </center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Agregirajuće funkcije:</h3></center>
+    <ul>
+      <li>Djeluju na svim recima istovremeno</li>
+      <li>Vraćaju jedan izlazni redak</li>
+    </ul>
+    <center>
+    <table border="1">
+      <tr>
+        <td>Opis:</td>
+        <td>Kod:</td>
+      </tr>
+      <tr>
+        <td>
+          Koristeći agregirajuću funkciju COUNT dobio sam rezultat kao broj igrača iz La Lige koji će uskoro u mirovinu (ako je netko od igrača rođen
+          prije 1990 godine, onda bi on trebao uskoro u mirovinu).
+        </td>
+        <td><img src="images/agreg.png" width="500" height="100"></td>
+      </tr>
+    </table>
+    </center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Podupiti, ugniježđeni upiti i skupovne operacije:</h3></center>
+    <center>
+    <table border="1">
+      <tr>
+        <td>Opis:</td>
+        <td>Kod:</td>
+      </tr>
+      <tr>
+        <td>
+          Primjer podupita koji prvo računa prosiječnu vrijednost svih igrača, zatim onda tu vrijednost uspoređuje sa svakim igračem
+          te onda vraća samo one igrače čija je vrijednost veća od prosječne.
+        </td>
+        <td><img src="images/podupit.png" width="500" height="100"></td>
+      </tr>
+    </table>
+    </center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Zadane vrijednosti:</h3></center>
+    <ul>
+      <li>U mojoj bazi podataka sam stavio zadanu vrijednost na atribut agent_igrac</li>
+      <li>Ukoliko igrač i dalje nema svog agenta tada se kao zadana vrijednost pri unosu u tablicu IGRAC u atribut agent_igrac upisuje "Nema agenta"</li>
+    </ul>
+    <center><img src="images/agent.png" width="700" height="250"></center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Uvjeti:</h3></center>
+    <ul>
+      <li>U moju bazu podataka jedan od uvjeta koje sam stavio je da stadion mora imati najmanje 20 000 mjesta.</li>
+      <li>Ukoliko stadion nema zadovoljen broj mjesta, tada se stadion ne može koristiti u svrhe odigravanja utakmica La Lige</li>
+      <li>Ako uneseni stadion ne zadovoljava uvijet, baza će vraitit Error</li>
+    </ul>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Indeksi:</h3></center>
+    <center><img src="images/indeksi.png" width="500" height="100"></center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Procedure:</h3></center>
+    <ul>
+      <li>Služe za organizaciju programerske logike u bazi podataka kojoj pristupaju različite aplikacije.</li>
+    </ul>
+    <center>
+    <table border="1">
+      <tr>
+        <td>Opis:</td>
+        <td>Kod:</td>
+      </tr>
+      <tr>
+        <td>
+          Ova procedura služi za ažuriranje kluba igrača u slučaju transfera. Parametri su ID igrača te ime njegovog novog kluba.
+        </td>
+        <td><img src="images/procedure.png" width="550" height="200"></td>
+      </tr>
+    </table>
+    </center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+    <center><h3>Okidači:</h3></center>
+    <ul>
+      <li>Pozivaju se automatski kada se izvrši neka od JMP naredbi.</li>
+    </ul>
+    <center>
+    <table border="1">
+      <tr>
+        <td>Opis:</td>
+        <td>Kod:</td>
+      </tr>
+      <tr>
+        <td>
+          Ovaj okidač služi da nas obavijesti u slučaju kad kod ažuriranja kapaciteta stadiona broj mjesta bude manji nego prije.
+        </td>
+        <td><img src="images/okidac.png" width="700" height="200"></td>
+      </tr>
+    </table>
+    </center>
+    <br>
+    <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+  </body>
+</html>
